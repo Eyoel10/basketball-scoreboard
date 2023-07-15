@@ -6,6 +6,7 @@ let foulGuestScore = 0
 let minute = 0
 let second = 0
 let called = 0
+const myInterval = setInterval(displayTime, 100)
 
 let homeScrEl = document.getElementById("scr-home")
 let guestScrEl = document.getElementById("scr-guest")
@@ -96,21 +97,24 @@ function reset() {
     timer()
 }
 
-function displayTime() {
-    second += 1
-    if (second%60 === 0) {
-        console.log("min "+minute)
-        second = 0
-        minute += 1
-    }
-    console.log("sec " +second)
-    
+function resetTime() {
+    called = 0
+    second = 0
+    minute = 0
     timeEl.textContent = minute +":"+ second
 }
 
-function timer() {
-    if (called === 0) {
-        setInterval(displayTime,100)
+function displayTime() {
+    if (called === 1) {
+        second += 1
+        if (second%60 === 0) {
+            second = 0
+            minute += 1
+        }   
+        timeEl.textContent = minute +":"+ second
     }
+}
+
+function timer() {
     called = 1
 }
